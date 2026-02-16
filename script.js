@@ -62,12 +62,12 @@ sendToGoogle(responseData);
 
     current++;
 
-    if (current < clips.length) {
-        loadClip();
-    } else {
-        
-        alert("Thank you! Your responses have been recorded.");
-    }
+if (current >= clips.length) {
+    alert("Thank you! Your responses have been recorded.");
+    return;
+}
+
+loadClip();
 }
 
 
@@ -75,15 +75,15 @@ function sendToGoogle(data) {
 
     fetch(SCRIPT_URL, {
         method: "POST",
+        mode: "no-cors",   // 🔥 THIS FIXES CORS
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json"
         }
     })
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.error(error));
+    .catch(error => console.error("Error:", error));
 }
+
 
 
 function generateQuestions(type) {
@@ -136,4 +136,5 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
