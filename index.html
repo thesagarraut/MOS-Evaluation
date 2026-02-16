@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MOS Evaluation – Creative AI Composer</title>
+
+    <!-- IMPORTANT FOR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>MOS Evaluation Survey</h1>
+        <h3>Creative AI Composer</h3>
+        <p class="subtitle">
+            Generate Original Songs from Prompts, Lyrics, Melody<br>
+            <b>Language:</b> Marathi
+        </p>
+
+        <hr>
+
+        <label>Name (optional)</label>
+        <input type="text" id="name" placeholder="Your name">
+
+        <label>Musical Background</label>
+        <select id="background">
+            <option>No formal training</option>
+            <option>Hobbyist / casual listener</option>
+            <option>Trained musician / singer</option>
+        </select>
+
+        <hr>
+
+        <h2 id="clipTitle"></h2>
+
+        <audio id="audioPlayer" controls></audio>
+
+        <div class="question-block" id="questionBlock"></div>
+
+        <button onclick="nextClip()">Next</button>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
