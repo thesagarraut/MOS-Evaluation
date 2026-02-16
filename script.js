@@ -1,3 +1,5 @@
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPh9Hl0AaGZcNuyXcBwELsjme71x2EATjKhj5FBtUPRIdVKsP5Lro1IBFoAOUMrvpTbw/exec";
+
 const clips = [
     { id: "I01", file: "audio/Clip1.wav", type: "Instrumental" },
     { id: "S01", file: "audio/Clip2.wav", type: "Singing" },
@@ -44,41 +46,45 @@ function nextClip() {
         answers.push(selected.value);
     }
 
-    responses.push({
-        name: document.getElementById("name").value,
-        background: document.getElementById("background").value,
-        clip: clips[current].id,
-        type: clips[current].type,
-        ratings: answers.join(",")
-    });
+    let responseData = {
+    name: document.getElementById("name").value,
+    background: document.getElementById("background").value,
+    clip: clips[current].id,
+    type: clips[current].type,
+    q1: answers[0] || "",
+    q2: answers[1] || "",
+    q3: answers[2] || "",
+    q4: answers[3] || ""
+};
+
+sendToGoogle(responseData);
+
 
     current++;
 
     if (current < clips.length) {
         loadClip();
     } else {
-        downloadCSV();
-        alert("Thank you! Responses downloaded.");
+        
+        alert("Thank you! Your responses have been recorded.");
     }
 }
 
 
-function downloadCSV() {
-    let csv = "Name,Background,Clip,Type,Q1,Q2,Q3,Q4\n";
+function sendToGoogle(data) {
 
-    responses.forEach(r => {
-        let row = `${r.name},${r.background},${r.clip},${r.type},${r.ratings}\n`;
-        csv += row;
-    });
-
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "mos_results.csv";
-    a.click();
+    fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.error(error));
 }
+
 
 function generateQuestions(type) {
 
@@ -130,3 +136,4 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
