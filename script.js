@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPh9Hl0AaGZcNuyXcBwELsjme71x2EATjKhj5FBtUPRIdVKsP5Lro1IBFoAOUMrvpTbw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyCi5EzcvGFJaI-GDF1eeFpAl_3s7-iLIHb0RNamOmwWKABOYpAQjGupr33uo1j-WKGTQ/exec";
 
 const clips = [
     { id: "I01", file: "audio/Clip1.wav", type: "Instrumental" },
@@ -73,17 +73,20 @@ loadClip();
 
 function sendToGoogle(data) {
 
+    const formData = new FormData();
+
+    for (const key in data) {
+        formData.append(key, data[key]);
+    }
+
     fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors",   // 🔥 THIS FIXES CORS
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json"
-        }
+        mode: "no-cors",
+        body: formData
     })
+    .then(() => console.log("Data sent"))
     .catch(error => console.error("Error:", error));
 }
-
 
 
 function generateQuestions(type) {
@@ -136,5 +139,6 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
 
