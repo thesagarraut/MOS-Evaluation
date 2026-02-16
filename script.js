@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyCi5EzcvGFJaI-GDF1eeFpAl_3s7-iLIHb0RNamOmwWKABOYpAQjGupr33uo1j-WKGTQ/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGjZ0WntFba1VjrGczPFix57CKWfZyH1TFpgo4wc7fbYLaOA0Rrq3rSCiVVEhRoCKWHw/exec";
 
 const clips = [
     { id: "I01", file: "audio/Clip1.wav", type: "Instrumental" },
@@ -50,14 +50,43 @@ function nextClip() {
     name: document.getElementById("name").value,
     background: document.getElementById("background").value,
     clip: clips[current].id,
-    type: clips[current].type,
-    q1: answers[0] || "",
-    q2: answers[1] || "",
-    q3: answers[2] || "",
-    q4: answers[3] || ""
+    type: clips[current].type
 };
 
+// Initialize all fields blank
+responseData.musical_naturalness = "";
+responseData.melody_quality = "";
+responseData.vocal_naturalness = "";
+responseData.pronunciation = "";
+responseData.pitch_expression = "";
+responseData.sync = "";
+responseData.mixing = "";
+responseData.professional = "";
+responseData.overall = "";
+
+// Assign based on type
+if (clips[current].type === "Instrumental") {
+    responseData.musical_naturalness = answers[0];
+    responseData.melody_quality = answers[1];
+    responseData.overall = answers[2];
+}
+
+if (clips[current].type === "Singing") {
+    responseData.vocal_naturalness = answers[0];
+    responseData.pronunciation = answers[1];
+    responseData.pitch_expression = answers[2];
+    responseData.overall = answers[3];
+}
+
+if (clips[current].type === "Complete Song") {
+    responseData.overall = answers[0];
+    responseData.sync = answers[1];
+    responseData.mixing = answers[2];
+    responseData.professional = answers[3];
+}
+
 sendToGoogle(responseData);
+
 
 
     current++;
@@ -139,6 +168,7 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
 
 
