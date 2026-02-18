@@ -3,6 +3,18 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyap0Xae-QbcHIzK6ANH
 const clips = [
     { id: "I01", file: "audio/Clip1.wav", type: "Instrumental" },
     { id: "S01", file: "audio/Clip2.wav", type: "Singing" },
+    
+    { id: "S01", file: "audio/S01.wav", type: "Singing" },
+    { id: "S02", file: "audio/S02.wav", type: "Singing" },
+    { id: "S03", file: "audio/S03.wav", type: "Singing" },
+    { id: "S04", file: "audio/S04.wav", type: "Singing" },
+    { id: "S05", file: "audio/S05.wav", type: "Singing" },
+    { id: "S06", file: "audio/S06.wav", type: "Singing" },
+    { id: "S07", file: "audio/S07.wav", type: "Singing" },
+    { id: "S08", file: "audio/S08.wav", type: "Singing" },
+    { id: "S09", file: "audio/S09.wav", type: "Singing" },
+    { id: "S010", file: "audio/S010.wav", type: "Singing" },
+    
     { id: "C01", file: "audio/Clip3.wav", type: "Complete Song" }
 ];
 
@@ -168,6 +180,7 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
 
 
