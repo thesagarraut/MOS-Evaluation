@@ -1,8 +1,16 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyap0Xae-QbcHIzK6ANH_tgtxTfQIxAspgWk1zMUOyCCXEcvVqFQ-g8hTEk4TcXMw_u/exec";
 
 const clips = [
-    { id: "I01", file: "audio/Clip1.wav", type: "Instrumental" },
-    { id: "S01", file: "audio/Clip2.wav", type: "Singing" },
+    { id: "I01", file: "audio/I01.wav", type: "Instrumental" },
+    { id: "I02", file: "audio/I02.wav", type: "Instrumental" },
+    { id: "I03", file: "audio/I03.wav", type: "Instrumental" },
+    { id: "I04", file: "audio/I04.wav", type: "Instrumental" },
+    { id: "I05", file: "audio/I05.wav", type: "Instrumental" },
+    { id: "I06", file: "audio/I06.wav", type: "Instrumental" },
+    { id: "I07", file: "audio/I07.wav", type: "Instrumental" },
+    { id: "I08", file: "audio/I08.wav", type: "Instrumental" },
+    { id: "I09", file: "audio/I09.wav", type: "Instrumental" },
+    { id: "I10", file: "audio/I10.wav", type: "Instrumental" },
     
     { id: "S01", file: "audio/S01.wav", type: "Singing" },
     { id: "S02", file: "audio/S02.wav", type: "Singing" },
@@ -15,7 +23,17 @@ const clips = [
     { id: "S09", file: "audio/S09.wav", type: "Singing" },
     { id: "S010", file: "audio/S010.wav", type: "Singing" },
     
-    { id: "C01", file: "audio/Clip3.wav", type: "Complete Song" }
+    { id: "C01", file: "audio/C01.wav", type: "Complete Song" },
+    { id: "C02", file: "audio/C02.wav", type: "Complete Song" },
+    { id: "C03", file: "audio/C03.wav", type: "Complete Song" },
+    { id: "C04", file: "audio/C04.wav", type: "Complete Song" },
+    { id: "C05", file: "audio/C05.wav", type: "Complete Song" },
+    { id: "C06", file: "audio/C06.wav", type: "Complete Song" },
+    { id: "C07", file: "audio/C07.wav", type: "Complete Song" },
+    { id: "C08", file: "audio/C08.wav", type: "Complete Song" },
+    { id: "C09", file: "audio/C09.wav", type: "Complete Song" },
+    { id: "C10", file: "audio/C10.wav", type: "Complete Song" }
+    
 ];
 
 clips.sort(() => Math.random() - 0.5);
@@ -180,6 +198,7 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
 
 
