@@ -21,7 +21,7 @@ const clips = [
     { id: "S07", file: "audio/S07.wav", type: "Singing" },
     { id: "S08", file: "audio/S08.wav", type: "Singing" },
     { id: "S09", file: "audio/S09.wav", type: "Singing" },
-    { id: "S010", file: "audio/S010.wav", type: "Singing" },
+    { id: "S10", file: "audio/S10.wav", type: "Singing" },
     
     { id: "C01", file: "audio/C01.wav", type: "Complete Song" },
     { id: "C02", file: "audio/C02.wav", type: "Complete Song" },
@@ -36,8 +36,65 @@ const clips = [
     
 ];
 
-clips.sort(() => Math.random() - 0.5);
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
 
+function selectBatch() {
+
+    function removePairs(realArray, aiArray, count) {
+
+        shuffle(realArray);
+        shuffle(aiArray);
+
+        let selected = [];
+        let usedNumbers = new Set();
+
+        for (let clip of realArray) {
+
+            let num = clip.id.replace(/\D/g,'');
+
+            if (!usedNumbers.has(num) && selected.length < count) {
+                selected.push(clip);
+                usedNumbers.add(num);
+            }
+        }
+
+        for (let clip of aiArray) {
+
+            let num = clip.id.replace(/\D/g,'');
+
+            if (!usedNumbers.has(num) && selected.length < count*2) {
+                selected.push(clip);
+                usedNumbers.add(num);
+            }
+        }
+
+        return selected.slice(0,count*2);
+    }
+
+    let instrumental_real = clips.filter(c => c.type=="Instrumental" && !c.id.startsWith("AI"));
+    let instrumental_ai = clips.filter(c => c.type=="Instrumental" && c.id.startsWith("AI"));
+
+    let singing_real = clips.filter(c => c.type=="Singing" && !c.id.startsWith("AI"));
+    let singing_ai = clips.filter(c => c.type=="Singing" && c.id.startsWith("AI"));
+
+    let complete_real = clips.filter(c => c.type=="Complete Song" && !c.id.startsWith("AI"));
+    let complete_ai = clips.filter(c => c.type=="Complete Song" && c.id.startsWith("AI"));
+
+    let batch = [
+
+        ...removePairs(instrumental_real, instrumental_ai, 3),
+        ...removePairs(singing_real, singing_ai, 3),
+        ...removePairs(complete_real, complete_ai, 4)
+
+    ];
+
+    return shuffle(batch);
+}
+let evaluationClips = selectBatch();
+
+console.log(evaluationClips);
 
 let current = 0;
 let responses = [];
@@ -52,8 +109,10 @@ audioPlayer.onplay = () => {
 };
 
 function loadClip() {
-    const clip = clips[current];
+    const clip = evaluationClips[current];
     clipTitle.innerText = `${clip.type} Clip ${clip.id}`;
+    document.getElementById("progressText").innerText =
+        `Clip ${current + 1} / ${evaluationClips.length}`;
     audioPlayer.src = clip.file;
 
     generateQuestions(clip.type);
@@ -79,8 +138,8 @@ function nextClip() {
     let responseData = {
     name: document.getElementById("name").value,
     background: document.getElementById("background").value,
-    clip: clips[current].id,
-    type: clips[current].type
+    clip: evaluationClips[current].id,
+    type: evaluationClips[current].type
 };
 
 // Initialize all fields blank
@@ -95,20 +154,20 @@ responseData.professional = "";
 responseData.overall = "";
 
 // Assign based on type
-if (clips[current].type === "Instrumental") {
+if (evaluationClips[current].type === "Instrumental") {
     responseData.musical_naturalness = answers[0];
     responseData.melody_quality = answers[1];
     responseData.overall = answers[2];
 }
 
-if (clips[current].type === "Singing") {
+if (evaluationClips[current].type === "Singing") {
     responseData.vocal_naturalness = answers[0];
     responseData.pronunciation = answers[1];
     responseData.pitch_expression = answers[2];
     responseData.overall = answers[3];
 }
 
-if (clips[current].type === "Complete Song") {
+if (evaluationClips[current].type === "Complete Song") {
     responseData.overall = answers[0];
     responseData.sync = answers[1];
     responseData.mixing = answers[2];
@@ -121,11 +180,11 @@ sendToGoogle(responseData);
 
     current++;
 
-if (current >= clips.length) {
+if (current >= evaluationClips.length) {
     alert("Thank you! Your responses have been recorded.");
     return;
 }
-
+window.audioPlayed = false;
 loadClip();
 }
 
@@ -198,6 +257,7 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
 
 
