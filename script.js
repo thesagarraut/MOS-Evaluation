@@ -17,23 +17,39 @@ const clips = [
     { id: "S03", file: "audio/S03.wav", type: "Singing" },
     { id: "S04", file: "audio/S04.wav", type: "Singing" },
     { id: "S05", file: "audio/S05.wav", type: "Singing" },
-    { id: "S06", file: "audio/S06.wav", type: "Singing" },
-    { id: "S07", file: "audio/S07.wav", type: "Singing" },
-    { id: "S08", file: "audio/S08.wav", type: "Singing" },
-    { id: "S09", file: "audio/S09.wav", type: "Singing" },
-    { id: "S10", file: "audio/S10.wav", type: "Singing" },
+   
     
     { id: "C01", file: "audio/C01.wav", type: "Complete Song" },
     { id: "C02", file: "audio/C02.wav", type: "Complete Song" },
     { id: "C03", file: "audio/C03.wav", type: "Complete Song" },
     { id: "C04", file: "audio/C04.wav", type: "Complete Song" },
     { id: "C05", file: "audio/C05.wav", type: "Complete Song" },
-    { id: "C06", file: "audio/C06.wav", type: "Complete Song" },
-    { id: "C07", file: "audio/C07.wav", type: "Complete Song" },
-    { id: "C08", file: "audio/C08.wav", type: "Complete Song" },
-    { id: "C09", file: "audio/C09.wav", type: "Complete Song" },
-    { id: "C10", file: "audio/C10.wav", type: "Complete Song" }
     
+
+    { id: "AI_I01", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I02", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I03", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I04", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I05", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I06", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I07", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I08", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I09", file: "audio/AI_I01.wav", type: "Instrumental" },
+    { id: "AI_I010", file: "audio/AI_I01.wav", type: "Instrumental" },
+
+    { id: "AI_S01", file: "audio/AI_S01.wav", type: "Singing" },
+    { id: "AI_S02", file: "audio/AI_S02.wav", type: "Singing" },
+    { id: "AI_S03", file: "audio/AI_S03.wav", type: "Singing" },
+    { id: "AI_S04", file: "audio/AI_S04.wav", type: "Singing" },
+    { id: "AI_S05", file: "audio/AI_S05.wav", type: "Singing" },
+
+    { id: "AI_C01", file: "audio/AI_C01.wav", type: "Complete Song" },
+    { id: "AI_C02", file: "audio/AI_C02.wav", type: "Complete Song" },
+    { id: "AI_C03", file: "audio/AI_C03.wav", type: "Complete Song" },
+    { id: "AI_C04", file: "audio/AI_C04.wav", type: "Complete Song" },
+    { id: "AI_C05", file: "audio/AI_C05.wav", type: "Complete Song" },
+    
+
 ];
 
 function shuffle(array) {
@@ -257,6 +273,7 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
 
 
