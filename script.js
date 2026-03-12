@@ -130,7 +130,7 @@ function loadClip() {
     document.getElementById("progressText").innerText =
         `Clip ${current + 1} / ${evaluationClips.length}`;
     audioPlayer.src = clip.file;
-
+    console.log(clip.file);
     generateQuestions(clip.type);
 }
 function clearRating() {
@@ -273,6 +273,7 @@ function generateQuestions(type) {
         container.innerHTML += html;
     });
 }
+
 
 
 
